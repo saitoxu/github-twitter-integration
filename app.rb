@@ -22,7 +22,7 @@ post '/payload' do
     message = commit['message']
     if message.start_with?(prefix)
       title = message.sub(/${prefix}/, '').strip
-      addedFiles = commit['message']
+      addedFiles = commit['added']
       for added in addedFiles do
         if md = added.match(/([0-9]{4})-([0-9]{2})-([0-9]{2})-(.*).md/)
           year  = md[1]
@@ -33,6 +33,8 @@ post '/payload' do
 
           client.update(title + "\n" + url)
           count += 1
+        else
+          client.update(title)
         end
       end
     end
