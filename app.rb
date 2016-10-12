@@ -34,8 +34,6 @@ post '/payload' do
           client.update(title + "\n" + url)
           count += 1
         end
-      else
-        client.update(title)
       end
     end
   end
