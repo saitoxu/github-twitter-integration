@@ -1,0 +1,13 @@
+---
+chdir: /var/lib/github-twitter-integration
+environment: production
+port: 10080
+timeout: 30
+log: log/production.log
+pid: tmp/pids/thin.pid
+max_conns: 1024
+max_persistent_conns: 100
+require: []
+wait: 30
+threadpool_size: 20
+daemonize: true
