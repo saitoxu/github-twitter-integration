@@ -33,12 +33,12 @@ post '/payload' do
 
           client.update(title + "\n" + url)
           count += 1
-        else
-          client.update(title)
         end
+      else
+        client.update(title)
       end
     end
   end
-  puts "#{count} tweet(s) posted."
+  "#{count} tweet(s) posted."
 
 end
