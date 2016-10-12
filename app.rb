@@ -18,21 +18,23 @@ post '/payload' do
   prefix = 'POST:'
   commits = JSON.parse(request.body.read)['commits']
 
-  for commit in commits do
-    message = commit['message']
-    if message.start_with?(prefix)
-      title = message.sub(/${prefix}/, '').strip
-      addedFiles = commit['added']
-      for added in addedFiles do
-        if md = added.match(/([0-9]{4})-([0-9]{2})-([0-9]{2})-(.*).md/)
-          year  = md[1]
-          month = md[2]
-          day   = md[3]
-          page  = md[4] + '.html'
-          url = ['http://saitoxu.io/blog/', year, month, day, page].join('/')
+  if commits
+    for commit in commits do
+      message = commit['message']
+      if message.start_with?(prefix)
+        title = message.sub(/#{prefix}/, '').strip
+        addedFiles = commit['added']
+        for added in addedFiles do
+          if md = added.match(/([0-9]{4})-([0-9]{2})-([0-9]{2})-(.*).md/)
+            year  = md[1]
+            month = md[2]
+            day   = md[3]
+            page  = md[4] + '.html'
+            url = ['http://saitoxu.io/blog/', year, month, day, page].join('/')
 
-          client.update(title + "\n" + url)
-          count += 1
+            client.update(title + "\n" + url)
+            count += 1
+          end
         end
       end
     end
