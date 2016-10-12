@@ -3,6 +3,7 @@ require 'twitter'
 require 'json'
 
 get '/' do
+  'working'
 end
 
 post '/payload' do
@@ -19,7 +20,7 @@ post '/payload' do
 
   for commit in commits do
     message = commit['message']
-    if message.start_with?(PREFIX)
+    if message.start_with?(prefix)
       title = message.sub(/${prefix}/, '').strip
       addedFiles = commit['message']
       for added in addedFiles do
