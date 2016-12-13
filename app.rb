@@ -30,7 +30,7 @@ post '/payload' do
             month = md[2]
             day   = md[3]
             page  = md[4] + '.html'
-            url = ['http://saitoxu.io/blog', year, month, day, page].join('/')
+            url = ['http://saitoxu.io', year, month, day, page].join('/')
 
             client.update(title + "\n" + url)
             count += 1
